@@ -1,13 +1,12 @@
-// const navigation = [
-//   { name: "Dashboard", href: "#", current: true },
-//   { name: "Team", href: "#", current: false },
-//   { name: "Projects", href: "#", current: false },
-//   { name: "Calendar", href: "#", current: false },
-// ];
-
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useResolvedPath } from "react-router-dom";
 
 export default function NavBar() {
+  const resolved = useResolvedPath();
+
+  const withoutAction = "rounded-md px-3 py-2 text-sm font-medium";
+  const withAction =
+    "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white";
+
   return (
     <>
       <nav class="bg-white">
@@ -66,7 +65,9 @@ export default function NavBar() {
                 <div class="flex space-x-4">
                   <Link
                     to="/"
-                    class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                    className={
+                      resolved.pathname == "/" ? withAction : withoutAction
+                    }
                   >
                     {" "}
                     Home
@@ -74,7 +75,9 @@ export default function NavBar() {
 
                   <Link
                     to="/about"
-                    class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                    className={
+                      resolved.pathname == "/about" ? withAction : withoutAction
+                    }
                   >
                     {" "}
                     About
@@ -85,12 +88,21 @@ export default function NavBar() {
             <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
               <button
                 type="button"
-                class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                class="relative rounded-full bg-gray-300 mr-1 p-1 text-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+              >
+                <span class="absolute -inset-1.5"></span>
+                <span class="sr-only">View notifications</span>
+                <img src="/public/icons8-add-50.png" className="w-7" />
+              </button>
+
+              <button
+                type="button"
+                class="relative rounded-full bg-gray-300 p-1 text-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
               >
                 <span class="absolute -inset-1.5"></span>
                 <span class="sr-only">View notifications</span>
                 <svg
-                  class="h-6 w-6"
+                  class="w-7"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
