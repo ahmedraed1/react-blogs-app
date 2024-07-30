@@ -1,4 +1,50 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 export default function Login() {
+  let navigate = useNavigate();
+  const [data, setData] = useState({ input: "", password: "" });
+
+  const sendData = () => {
+    axios
+      .post("http://localhost:3000/login", {
+        input: data.input,
+        password: data.password,
+      })
+      .then((res) => {
+        if (res.data.status == true && res.data.token != undefined) {
+          window.localStorage.setItem("token", res.data.token);
+          navigate("/");
+        } else {
+          console.log("False Information");
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  // window.onload = () => {
+  //   let token = localStorage.getItem("token");
+  //   if (token != undefined) {
+  //     axios
+  //       .post(
+  //         "http://localhost:3000/auth",
+  //         {}, // Empty body if not needed
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`,
+  //           },
+  //         }
+  //       )
+  //       .then((res) => {
+  //         if (res.data.status) {
+  //           Navigate("/");
+  //         }
+  //       })
+  //       .catch((error) => console.log(error));
+  //   }
+  // };
+
   return (
     <>
       <section class="bg-gray-50">
@@ -19,7 +65,7 @@ export default function Login() {
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                 Sign in to your account
               </h1>
-              <form class="space-y-4 md:space-y-6" action="#">
+              <div class="space-y-4 md:space-y-6">
                 <div>
                   <label
                     for="email"
@@ -28,6 +74,10 @@ export default function Login() {
                     Email or Username
                   </label>
                   <input
+                    onChange={(e) =>
+                      setData({ ...data, input: e.target.value })
+                    }
+                    value={data.input}
                     type="text"
                     name="emailAndUsername"
                     id="emailAndUsername"
@@ -44,6 +94,10 @@ export default function Login() {
                     Password
                   </label>
                   <input
+                    onChange={(e) =>
+                      setData({ ...data, password: e.target.value })
+                    }
+                    value={data.password}
                     type="password"
                     name="password"
                     id="password"
@@ -80,6 +134,7 @@ export default function Login() {
                   </a>
                 </div>
                 <button
+                  onClick={sendData}
                   type="submit"
                   class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
@@ -94,7 +149,7 @@ export default function Login() {
                     Sign up
                   </a>
                 </p>
-              </form>
+              </div>
             </div>
           </div>
         </div>
