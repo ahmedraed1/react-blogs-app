@@ -9,6 +9,7 @@ import SignUp from "./view/register/signUp";
 import NotFound from "./view/notFound";
 import Profile from "./view/profile";
 import axios from "axios";
+import Sitting from "./view/sitting";
 function App() {
   const navigate = useNavigate();
   const resolved = useResolvedPath();
@@ -35,7 +36,7 @@ function App() {
           }
         })
         .catch((error) => {
-          console.log("ERROR! :" + error.response.data + " :(");
+          console.log("ERROR! :" + error + " :(");
           navigate("/register/login");
         });
     }
@@ -48,6 +49,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/sitting" element={<Sitting />} />
         </Route>
         <Route path="/register/login" element={<Login />} />
         <Route path="/register/signup" element={<SignUp />} />

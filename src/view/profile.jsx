@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import MyBlogs from "../components/myBlogs";
 // import { useResolvedPath } from "react-router-dom";
 
 export default function Profile() {
@@ -82,7 +83,7 @@ export default function Profile() {
           <div class="flex flex-col lg:flex-row max-lg:gap-5 items-center justify-between py-0.5">
             <div class="flex items-center gap-4">
               <button class="py-3.5 px-5 rounded-full bg-indigo-600 text-white font-semibold text-base leading-7 shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-100 hover:bg-indigo-700">
-                Edit Profile
+                ✨ Complete Your Profile ✨
               </button>
               {/* <button class="py-3.5 px-5 rounded-full bg-indigo-50 text-indigo-600 font-semibold text-base leading-7 shadow-sm shadow-transparent transition-all duration-500 hover:bg-indigo-100">
                 Settings
@@ -124,6 +125,29 @@ export default function Profile() {
               </ul>
             </div>
           </div>
+        </div>
+        <div className="mt-12 h-fit">
+          <div>
+            <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 justify-center">
+              <li class="me-2">
+                <a
+                  href="#"
+                  class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 font-bold px-10"
+                >
+                  All
+                </a>
+              </li>
+              <li class="me-2">
+                <a
+                  href="#"
+                  class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 font-bold px-10"
+                >
+                  Newest
+                </a>
+              </li>
+            </ul>
+          </div>
+          <MyBlogs filterDate="All" />
         </div>
       </section>
     </>
