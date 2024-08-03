@@ -3,6 +3,7 @@ import Articles from "../components/articles";
 import Footer from "../components/footer";
 import WhoToFollow from "../components/whoToFollow";
 import Sections from "../components/sections";
+
 export default function Home() {
   return (
     <>

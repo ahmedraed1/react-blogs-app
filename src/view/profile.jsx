@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import MyBlogs from "../components/myBlogs";
+// import EditingProfile from "../components/editingProfile";
 // import { useResolvedPath } from "react-router-dom";
 
 export default function Profile() {
@@ -127,6 +128,10 @@ export default function Profile() {
           </div>
         </div>
         <div className="mt-12 h-fit">
+          {/* Editing Profile */}
+          {/* <div>
+            <EditingProfile />
+          </div> */}
           <div>
             <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 justify-center">
               <li class="me-2">

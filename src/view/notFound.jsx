@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 export default function NotFound() {
   return (
     <>
@@ -29,9 +30,11 @@ export default function NotFound() {
             </p>
 
             <div class="flex items-center w-full mt-6 gap-x-3 shrink-0 sm:w-auto">
-              <button class="w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
-                Take me home
-              </button>
+              <Link to="/">
+                <button class="w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
+                  Take me home
+                </button>
+              </Link>
             </div>
           </div>
         </div>

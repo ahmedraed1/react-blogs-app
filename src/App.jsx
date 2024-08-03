@@ -1,5 +1,6 @@
 import "./App.css";
 import { Routes, Route, useNavigate, useResolvedPath } from "react-router-dom";
+import { useEffect } from "react";
 import NavBar from "./components/navbar";
 import Home from "./view/home";
 import About from "./view/about";
@@ -13,7 +14,8 @@ import Sitting from "./view/sitting";
 function App() {
   const navigate = useNavigate();
   const resolved = useResolvedPath();
-  window.onload = () => {
+
+  useEffect(() => {
     let token = localStorage.getItem("token");
     if (token != undefined) {
       axios
@@ -39,15 +41,18 @@ function App() {
           console.log("ERROR! :" + error + " :(");
           navigate("/register/login");
         });
+    } else {
+      navigate("/register/login");
     }
-  };
+  }, []);
+
   return (
     <>
       <Routes>
         <Route path="/" element={<NavBar />}>
           <Route index element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<Blog />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/sitting" element={<Sitting />} />
         </Route>

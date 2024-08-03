@@ -1,4 +1,33 @@
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 export default function Blog() {
+  const { id } = useParams();
+  const [data, setData] = useState({});
+  const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://dummyjson.com/posts/${parseInt(id) + 1}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setTags(data.tags);
+      })
+      .catch((error) => console.error(error));
+
+    window.scrollTo(0, 0);
+  }, [id]);
+
+  let blogTags = tags.map((item, index) => {
+    return (
+      <button
+        key={index}
+        class="rounded-lg bg-gray-100 px-2 py-1 font-medium text-gray-600 hover:bg-gray-200"
+      >
+        {item}
+      </button>
+    );
+  });
+
   return (
     <>
       <div className="bg-white">
@@ -7,24 +36,13 @@ export default function Blog() {
             <header class="mx-auto mt-20 max-w-screen-lg rounded-t-lg bg-white pt-16 text-center shadow-lg">
               <p class="text-gray-500">Published April 4, 2022</p>
               <h1 class="mt-2 text-4xl font-bold text-gray-900 sm:text-5xl">
-                Why quit now?
+                {data.title}
               </h1>
               <p class="mt-6 text-lg text-gray-700">
                 You've come way farther than you expected
               </p>
-              <div class="mt-6 flex flex-wrap justify-center gap-2">
-                <button class="rounded-lg bg-gray-100 px-2 py-1 font-medium text-gray-600 hover:bg-gray-200">
-                  Marketing
-                </button>
-                <button class="rounded-lg bg-gray-100 px-2 py-1 font-medium text-gray-600 hover:bg-gray-200">
-                  Branding
-                </button>
-                <button class="rounded-lg bg-gray-100 px-2 py-1 font-medium text-gray-600 hover:bg-gray-200">
-                  Digital
-                </button>
-                <button class="rounded-lg bg-gray-100 px-2 py-1 font-medium text-gray-600 hover:bg-gray-200">
-                  Identity
-                </button>
+              <div class="mt-6 flex flex-wrap justify-center gap-2 text-black">
+                {blogTags}
               </div>
               <img
                 class="-z-10 absolute mt-10 h-96 w-full object-cover max"
@@ -34,25 +52,21 @@ export default function Blog() {
             </header>
 
             <div class="mx-auto max-w-screen-lg space-y-12 rounded-b-lg bg-white px-8 pt-10 pb-20 font-serif text-lg tracking-wide text-gray-700 sm:shadow-lg">
-              <h2 class="text-2xl font-semibold">
+              {/* <h2 class="text-2xl font-semibold">
                 First Steps to Life Betterment
               </h2>
               <blockquote class="max-w-lg border-l-4 px-4">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Assumenda maiores tempora quod ducimus dolore!
                 <span class="whitespace-nowrap text-sm">— Daniel Lehmer</span>
-              </blockquote>
-              <p>
+              </blockquote> */}
+              {/* <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
                 enim maxime sit laudantium! Dolore atque, maxime iusto ut quas
                 distinctio reiciendis animi voluptatibus soluta molestias,
                 mollitia officiis laboriosam illum earum.
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Accusamus similique reiciendis et recusandae provident
-                repellendus rem doloremque eaque error assumenda?
-              </p>
+              </p> */}
+              <p>{data.body}</p>
             </div>
           </article>
         </main>
